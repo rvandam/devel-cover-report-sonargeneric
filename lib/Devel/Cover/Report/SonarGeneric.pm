@@ -20,7 +20,8 @@ sub report {
 
         $otxt .= qq(  <file path="$file">\n);
 
-        for my $lnr ( sort { $a <=> $b } $st->items ) {
+        my @items = defined($st) ? (sort { $a <=> $b } $st->items) : ();
+        for my $lnr ( @items ) {
             my $sinfo = $st->location($lnr) // [];
             my $covered = 0;
             for my $s ( @$sinfo ) {
